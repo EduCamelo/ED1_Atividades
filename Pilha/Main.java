@@ -5,7 +5,7 @@ public class Main {
         Scanner input = new Scanner(System.in);
         StackInt x = new StackInt(10);
         System.out.println("Digite um número normal para converter em binário: ");
-        int aux, a = 12;
+        int aux, a = input.nextInt();
         do {
             aux = a % 2;
             x.push(aux);

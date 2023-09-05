@@ -4,12 +4,18 @@ public class StackChar {
 
     public StackChar(int tam) {
         this.vet = new char[tam];
-        this.aux = tam;
+        this.aux = -1;
+    }
+
+    public StackChar() {
+        int tam = 10;
+        this.vet = new char[tam];
+        this.aux = -1;
     }
 
     public void push(char b) {
         if (!this.isFull()) {
-            this.aux--;
+            this.aux++;
             this.vet[this.aux] = b;
         } else {
             System.out.println("Lista cheia!");
@@ -20,8 +26,8 @@ public class StackChar {
         if (this.isEmpty()) {
             return -1;
         } else {
-            this.aux++;
-            return this.vet[this.aux - 1] = 0;
+            this.aux--;
+            return this.vet[this.aux+1] = 0;
         }
     }
 
@@ -34,16 +40,10 @@ public class StackChar {
     }
 
     public boolean isEmpty() {
-        if (this.aux == this.vet.length) {
-            return true;
-        }
-        return false;
+        return aux == -1;
     }
 
     public boolean isFull() {
-        if (this.aux == 0) {
-            return true;
-        }
-        return false;
+        return aux == vet.length-1;
     }
 }

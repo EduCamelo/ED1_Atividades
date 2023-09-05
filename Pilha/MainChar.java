@@ -6,19 +6,18 @@ public class MainChar {
         System.out.println("Digite uma frase ou uma palavra para verificar, se é um palíndormo: ");
         String x = input.nextLine();
         StackChar y = new StackChar(x.length());
-        for(int i = 0; i<x.length(); i++){
+        for (int i = 0; i < x.length(); i++) {
             y.push(x.charAt(i));
         }
-        for(int i = 0; i<x.length(); i++){
-            if(x.charAt(i) != y.top()){
+        for (int i = 0; i < x.length(); i++) {
+            if (x.charAt(i) != y.top()) {
                 System.out.println("Não é um palíndromo");
                 break;
-            }
-            else{
+            } else {
                 y.pop();
             }
-            System.out.println("É um palíndromo");
         }
+        System.out.println("É um palíndromo");
         input.close();
     }
 }
