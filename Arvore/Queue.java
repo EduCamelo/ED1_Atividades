@@ -1,15 +1,15 @@
-public class QueueInt {
-    private int[] queue;
+public class Queue<T> {
+    private T[] queue;
     private int quant;
 
-    public void enqueue(int n) {
+    public void enqueue(T n) {
         this.queue[this.quant] = n;
         quant++;
     }
 
-    public int dequeue() {
-        int temp;
-        int save = this.queue[0];
+    public T dequeue() {
+        T temp;
+        T save = this.queue[0];
         for (int i = 0; i < this.queue.length; i++) {
             temp = this.queue[i];
             if (i != 0) {
@@ -20,7 +20,7 @@ public class QueueInt {
         return save;
     }
 
-    public int head() {
+    public T head() {
         return this.queue[0];
     }
 
