@@ -10,7 +10,7 @@ public class Produto implements Comparable <Produto> {
     private int qtd;
     private double preco;
 
-    public Produto(String codigo, String descricao, String fornecedor, int qtd, double preco) {
+    public Produto(String codigo, String descricao, String fornecedor, double preco, int qtd) {
         this.codigo = codigo;
         this.descricao = descricao;
         this.fornecedor = fornecedor;
@@ -68,6 +68,7 @@ public class Produto implements Comparable <Produto> {
         this.preco = preco;
     }
     @Override
+    
     public int compareTo(Produto outro) {
         return this.getCodigo().compareTo(outro.getCodigo());
     }

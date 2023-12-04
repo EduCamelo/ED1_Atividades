@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 public class SearchTree {
     private TreeB<Produto> raiz;
 
@@ -7,25 +9,25 @@ public class SearchTree {
 
     public void add(Produto x) {
         if (this.isEmpty()) {
-            raiz.setInfo(x);
+            raiz = new TreeB<Produto>(x);
         } else {
             raiz.insertNode(x);
         }
     }
 
-    public void Ordem() {
-        if (this.isEmpty()) {
-            System.out.println("Árvore vazia");
-        } else {
-            this.percorrerOrdemCres(raiz);
+    public void emOrdem(){
+        if (this.raiz == null) {
+            System.out.println("Vazia!");
+        }else{
+            this.percorrerEmOrdemRecursivo(raiz);
         }
-    }
 
-    private void percorrerOrdemCres(TreeB<Produto> r) {
+    }
+    private void percorrerEmOrdemRecursivo(TreeB<Produto> r){
         if (r != null) {
-            percorrerOrdemCres(r.getLeft());
-            System.out.println(r.getInfo().toString());
-            System.out.println(r.getRight().toString());
+            percorrerEmOrdemRecursivo(r.getLeft());
+            System.out.println(r.getInfo());
+            percorrerEmOrdemRecursivo(r.getRight());
         }
     }
 
@@ -87,7 +89,7 @@ public class SearchTree {
 
     public void inserirSemRecursivo(Produto outro) {
         if (this.isEmpty()) {
-            this.raiz.setInfo(outro);
+            raiz = new TreeB<Produto>(outro);
         } else {
             TreeB<Produto> aux = raiz;
             do {
@@ -96,13 +98,15 @@ public class SearchTree {
                 } else {
                     if (aux.getInfo().compareTo(outro) > 0) {
                         if (aux.getLeft() == null) {
-                            aux.getLeft().setInfo(outro);
+                            aux.setLeft(new TreeB<Produto>(outro));
+                            break;
                         } else {
                             aux = aux.getLeft();
                         }
                     } else {
                         if (aux.getRight() == null) {
-                            aux.getRight().setInfo(outro);
+                            aux.setRight(new TreeB<Produto>(outro));
+                            break;
                         } else {
                             aux = aux.getRight();
                         }
@@ -150,6 +154,43 @@ public class SearchTree {
         }else{
             TreeB<Produto> aux;
             Queue<Produto> fila = new Queue<Produto>();
+        }
+    }
+
+
+    public void preOrdemNaoRecursivo(){
+        Stack<TreeB<Produto>> pilha = new Stack<TreeB<Produto>>();
+        TreeB<Produto> aux = this.raiz;
+        if(this.isEmpty() == true){
+            System.out.println("Árvore vazia");
+        }else{
+            while(pilha.empty() == false || aux != null){
+                while(aux!= null){
+                    System.out.println(aux.getInfo().toString());
+                    pilha.push(aux);
+                    aux = aux.getLeft();
+                }
+                aux = pilha.pop();
+                aux = aux.getLeft();
+            }
+        }
+    }
+
+    public void OrdemNaoRecursivo(){
+        Stack<TreeB<Produto>> pilha = new Stack<TreeB<Produto>>();
+        TreeB<Produto> aux = this.raiz;
+        if(this.isEmpty() == true){
+            System.out.println("Árvore vazia");
+        }else{
+            while(!pilha.empty()|| aux != null){
+                while(aux!= null){
+                    pilha.push(aux);
+                    aux = aux.getLeft();
+                }
+                aux = pilha.pop();
+                System.out.println(aux.getInfo().toString());
+                aux = aux.getRight();
+            }
         }
     }
 

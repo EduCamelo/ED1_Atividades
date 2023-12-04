@@ -36,13 +36,13 @@ public class TreeB<T extends Comparable<T>> {
             System.out.println("Valor repetido");
         } else {
             if (this.info.compareTo(value) > 0) {
-                if (this.left == null) {
+                if (this.getLeft() == null) {
                     this.setLeft(new TreeB<T>(value));
                 } else {
                     this.getLeft().insertNode(value);
                 }
             } else {
-                if (this.right == null) {
+                if (this.getRight() == null) {
                     this.setRight(new TreeB<T>(value));
                 } else {
                     this.getRight().insertNode(value);
