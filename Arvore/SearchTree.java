@@ -19,7 +19,7 @@ public class SearchTree {
     Busca não recursiva:96
     Busca de repetidos: FAZER
     Remover: 209
-    Remover repetidos: FAZER
+    Remover repetidos: 259
   */
 
 
@@ -108,10 +108,10 @@ public class SearchTree {
                 } else {
                     aux = aux.getRight();
                 }
-            } while (true);
+            } while (aux!= null);
+            return null;
         }
     }
-
     public void inserirSemRecursivo(Produto outro) {
         if (this.isEmpty()) {
             raiz = new TreeB<Produto>(outro);
@@ -255,5 +255,50 @@ public class SearchTree {
             }
         }
     }
+
+    public void removerRepetido(Produto value){
+        if(this.isEmpty()){
+            System.out.println("Arvore vazia");
+        }else{
+            raiz = this.removerNodeRepetido(raiz,value);
+        }
+    }
+
+
+    private TreeB<Produto> removerNodeRepetido(TreeB<Produto> r, Produto value){
+      if(r != null){
+        if(r.getInfo().compareTo(value) == 0){
+        
+        if(r.getLeft().getInfo().compareTo(value)== 0){
+                do{
+                    r = r.getLeft();
+                }while(r.getLeft() != null && r.getInfo().compareTo(value)==0);
+            }
+        if(r.getLeft() == null && r.getRight() == null){
+                r = null;
+            }else{
+                if(r.getLeft() == null){
+                    r = r.getRight();
+                }else if(r.getRight() == null){
+                    r = r.getLeft();
+                }else{
+                    TreeB<Produto> aux1=r, aux2=aux1.getLeft();
+                    while (aux2.getRight() != null) {
+                        aux1 = aux2;
+                        aux2 = aux2.getRight();
+                    }
+                    aux1.setRight(r.getLeft());
+                    r.setInfo(aux2.getInfo());
+                }
+            }
+        }else if(r.getInfo().compareTo(value)<0){
+            r.setLeft(removerNode(r.getLeft(), value));
+        }else{
+            r.setRight(removerNode(r.getRight(), value));
+        }
+      }
+      return r;
+    }
+
 
 }
